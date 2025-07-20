@@ -21,7 +21,7 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           cossdddddddddsunt is {count}
         </button>
-        <p>
+        <p className='bg-amber-300'>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
