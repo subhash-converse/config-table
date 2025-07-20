@@ -1,6 +1,5 @@
 'use client';
 
-import SidebarLayout from '@/layouts/sidebar-layout';
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
@@ -233,7 +232,6 @@ const TableComp = () => {
   } | null>(null);
   const [editedValue, setEditedValue] = useState<string | number>('');
   const [savedValue, setSavededValue] = useState<string | number>('');
-  const [open, setOpen] = useState(false);
 
   const updateRow = (id: number, newValue: string | number, key: string) => {
     console.log(newValue);
@@ -369,20 +367,9 @@ const TableComp = () => {
   });
 
   return (
-    <SidebarLayout>
-      <div className={cn('bg-white flex gap-4 px-5 py-4 h-full ')}>
-        <div
-          className={cn(
-            'border border-gray-400 rounded-[7px] duration-500',
-            open ? 'w-[260px]' : 'w-[60px]',
-          )}
-          onClick={() => setOpen((prev) => !prev)}
-        ></div>
-        <div className={cn('border flex-1 border-gray-400 rounded-[7px] p-4')}>
-          <TableElement table={table} />
-        </div>
-      </div>
-    </SidebarLayout>
+    <div className={cn('rounded-[7px] p-4')}>
+      <TableElement table={table} />
+    </div>
   );
 };
 

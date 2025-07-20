@@ -1,10 +1,11 @@
 import './App.css';
-import TableComp from './components/widgets/table';
+import { Router } from './router/router';
 
 function App() {
   return (
     <>
-      <TableComp />
+      <Router />
+      {/* <TableComp /> */}
     </>
   );
 }

@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BsArrowLeftCircle } from 'react-icons/bs';
 import { cn } from '@/lib/utils';
+import { Outlet } from 'react-router-dom';
 
-const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
+const SidebarLayout = () => {
   const [open, setOpen] = useState(true);
   return (
     // <div className='h-screen bg-yellow-200'>{children}</div>
@@ -49,7 +50,9 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="border-b border-gray-400 flex justify-center items-center">
           Top-nav Bar
         </div>
-        <div className="">{children}</div>
+        <div className="">
+          <Outlet />
+        </div>
       </div>
     </div>
   );
