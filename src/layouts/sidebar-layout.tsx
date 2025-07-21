@@ -4,60 +4,68 @@ import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Link, Outlet } from 'react-router-dom';
 import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
+import { Badge } from '@/components/ui/badge';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 export const modules = [
   {
     name: 'Data Checks Module',
     link: '/data-checks-module',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-home',
   },
   {
     name: 'LDF Selection Module',
     link: '/ldf-selection-module',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-card',
   },
   {
     name: 'Assumption Bulk Upload',
     link: '/assumption-bulk-upload',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-box',
   },
   {
     name: 'Valuation Module',
     link: '/valuation-module',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-arrow-swap',
   },
   {
     name: 'Bulk Allocation Trigger',
     link: '/bulk-allocation-trigger',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-wallet-export',
   },
   {
     name: 'Allocation Process',
     link: '/allocation-process',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-file',
   },
   {
     name: 'Custom Allocation',
     link: '/custom-allocation',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-card',
   },
   {
     name: 'Discounting Process',
     link: '/discounting-process',
-    icon: <MdKeyboardDoubleArrowRight />,
+    icon: 'icon-wallet-export',
   },
 ];
 
 const SidebarLayout = () => {
   const [open, setOpen] = useState(true);
+  const [profile, setProfile] = useState(true);
+
   return (
     <div
       className={cn(
-        'h-screen w-full bg-white text-black grid duration-500',
+        'h-screen w-full bg-white text-black grid duration-500 font-myfont',
         open ? 'grid-cols-[290px_1fr]' : 'grid-cols-[65px_1fr]',
       )}
     >
-      <div className="grid grid-rows-[65px_1fr] border-r  border-gray-400 duration-500 overflow-hidden rounded-md">
+      <div className="grid grid-rows-[65px_1fr] duration-500 overflow-hidden rounded-md">
         <div
           className={cn(
             'grid border-b w-full border-gray-400 bg-[#FB4E0B] items-center ',
@@ -67,18 +75,7 @@ const SidebarLayout = () => {
           {open && (
             <>
               <div className="flex justify-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="21"
-                  height="24"
-                  viewBox="0 0 21 24"
-                  fill="none"
-                >
-                  <path
-                    d="M13.9287 19.5703C13.6499 20.0421 13.1334 20.333 12.5752 20.333H5.48633L10.9141 11.1484C11.1929 10.6768 11.7094 10.3867 12.2676 10.3867H19.3564L13.9287 19.5703ZM6.47949 12.8496C6.20067 13.3214 5.68418 13.6123 5.12598 13.6123H-1.96289L3.46484 4.42871C3.74366 3.95697 4.26016 3.66602 4.81836 3.66602H11.9072L6.47949 12.8496Z"
-                    fill="white"
-                  />
-                </svg>
+                <i className="icon-logo text-white text-[20px] "></i>
               </div>
               <div className="text-white whitespace-nowrap">Reserving Hub</div>
             </>
@@ -94,18 +91,26 @@ const SidebarLayout = () => {
           </div>
         </div>
 
-        <div className=" flex justify-center whitespace-nowrap overflow-hidden bg-[#F37F33A8]">
-          <div className={cn('w-full')}>
+        <div className=" grid grid-rows-[1fr_auto_auto] justify-center whitespace-nowrap overflow-hidden bg-[#F37F33A8]">
+          <div className={cn('w-full border-b')}>
             {modules.map(({ name, link, icon }) => (
               <Link
                 key={name}
                 to={link}
                 className={cn(
-                  'grid grid-rows-[50px] w-full items-center rounded text-white hover:text-[#FB4E0B] transition',
+                  'group grid grid-rows-[50px] w-full items-center rounded text-white hover:text-[#FB4E0B] transition',
                   open ? 'grid-cols-[65px_1fr_65px] ' : 'grid-cols-1',
                 )}
               >
-                <div className="flex justify-center items-center">{icon}</div>
+                <div className="flex justify-center items-center">
+                  {' '}
+                  <i
+                    className={cn(
+                      'text-[20px] transition-colors text-white group-hover:text-[#FB4E0B]',
+                      icon,
+                    )}
+                  ></i>
+                </div>
                 {open && (
                   <>
                     <div className="text-sm">{name}</div>
@@ -114,6 +119,144 @@ const SidebarLayout = () => {
                 )}
               </Link>
             ))}
+          </div>
+
+          <div className="border-b grid grid-rows-[50px_50px] py-[10px]">
+            <div
+              className={cn(
+                'grid w-full cursor-pointer items-center ',
+                open ? 'grid-cols-[65px_1fr] ' : 'grid-cols-1',
+              )}
+            >
+              <div className="flex justify-center">
+                <i className={cn('text-[20px] text-white icon-chat')}></i>
+              </div>
+              {open && (
+                <div className="text-white whitespace-nowrap">Support</div>
+              )}
+            </div>
+            <div
+              className={cn(
+                'grid  w-full cursor-pointer items-center ',
+                open ? 'grid-cols-[65px_1fr_65px] ' : 'grid-cols-1 relative',
+              )}
+            >
+              <div className="flex justify-center">
+                <i className="icon-notification text-white text-[20px] "></i>
+              </div>
+              {open && (
+                <div className="text-white whitespace-nowrap">
+                  Documentation
+                </div>
+              )}
+              <div
+                className={cn(
+                  'flex justify-center items-center',
+                  !open && 'absolute top-0 right-0',
+                )}
+              >
+                <Badge className="bg-red-600 rounded-[50%] size-[20px]" asChild>
+                  <div>1</div>
+                </Badge>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative w-full max-w-[360px]">
+            <div
+              className={cn(
+                'grid pt-[10px] pb-[7px] items-center w-full',
+                open ? 'grid-cols-[65px_1fr]' : 'grid-cols-1',
+              )}
+            >
+              <div className="flex justify-center">
+                <Popover open={profile} onOpenChange={setProfile}>
+                  <PopoverTrigger
+                    asChild
+                    onMouseEnter={() => setProfile(true)}
+                    onMouseLeave={() =>
+                      setTimeout(() => setProfile(false), 150)
+                    }
+                  >
+                    <div className="size-[40px] rounded-full bg-[#D8D9D4] overflow-hidden flex justify-center items-center text-[#898C81] cursor-pointer">
+                      D
+                    </div>
+                  </PopoverTrigger>
+
+                  <PopoverContent
+                    align="start"
+                    className="w-[289px] rounded-1 p-2 px-2.5"
+                    sideOffset={8}
+                    alignOffset={-15}
+                    onMouseEnter={() => setProfile(true)}
+                    onMouseLeave={() => setProfile(false)}
+                  >
+                    <div className="text-sm text-gray-700">
+                      <div className="border-b grid grid-cols-[auto_1fr] gap-7  pb-1">
+                        <div>
+                          <div className="relative ">
+                            <div className="size-[65px] rounded-full bg-[#D8D9D4] overflow-hidden flex justify-center items-center text-[#898C81] cursor-pointer">
+                              D
+                            </div>
+                            <div className="absolute bottom-0 right-0">
+                              <i className="icon-clock-filled "></i>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="py-1 pt-2 font-bold">Daniel Moss</div>
+                          <div className="text-[12px]">Head Underwritter</div>
+                          <div className="text-[12px]">Last seen Yesterday</div>
+
+                          <div className="grid grid-cols-4 pt-2 text-[15px]">
+                            <div>
+                              <i className="icon-website cursor-pointer"></i>
+                            </div>
+                            <div>
+                              <i className="icon-phone !text-[13px] cursor-pointer"></i>
+                            </div>
+                            <div>
+                              <i className="icon-mail cursor-pointer"></i>
+                            </div>
+                            <div>
+                              <i className="icon-link-logo cursor-pointer"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex flex-col text-[12px] gap-1 pt-2">
+                        <div className="grid grid-cols-[auto_1fr] gap-3 ">
+                          <div>
+                            <i className="icon-user-admin text-[15px]"></i>
+                          </div>
+                          <div>Admin Role</div>
+                        </div>
+                        <div className="grid grid-cols-[auto_1fr] gap-3">
+                          <div>
+                            <i className="icon-location text-[15px]"></i>
+                          </div>
+                          <div>Minories, London, UK</div>
+                        </div>
+                        <div className="grid grid-cols-[auto_1fr] gap-3">
+                          <div className="flex justify-center">
+                            <i className="icon-clock text-[13px]"></i>
+                          </div>
+                          <div>Tuesday, Dec 27 2022 16:25:39 GMT+0000</div>
+                        </div>
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </div>
+
+              {open && (
+                <div className="text-[#36434D] whitespace-nowrap">
+                  <div className="text-[14px]">Daniel Moss</div>
+                  <div className="text-[12px]">danielmoss@insurer.com</div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

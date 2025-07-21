@@ -37,191 +37,189 @@ type Heading<T> = {
   width?: string | number;
 };
 
-const headings: Heading<Transaction>[] = [
-  {
-    name: 'Id',
-    accessor: 'id',
-    editable: true,
-    className: (value) => (value === 1 ? 'bg-red-300 text-white' : ''),
-  },
-  { name: 'Date', accessor: 'date', editable: true },
-  {
-    name: 'Description',
-    editable: true,
-    accessor: 'description',
-    className: (value) => (value === 'Salary' ? 'bg-red-300 text-white' : ''),
-  },
-  {
-    name: 'Amount',
-    accessor: 'amount',
-    render: (value) => `₹${Math.abs(value).toLocaleString()}`,
-    className: (value) => (value < 0 ? 'text-red-500' : 'text-green-600'),
-  },
-  { name: 'Type', accessor: 'type' },
-  {
-    name: 'Action',
-    accessor: 'action',
-    render: (_value, row) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button className="p-1 hover:bg-gray-200 rounded">
-            <SlOptions className="w-4 h-4" />
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem
-            onClick={() => alert(`Editing ${row.description + ' ' + row.id}`)}
-          >
-            Edit
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => alert(`Deleting ${row.description + ' ' + row.id}`)}
-          >
-            Delete
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => alert(`Sharing ${row.description + ' ' + row.id}`)}
-          >
-            Share
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    ),
-  },
-];
-
-const data = [
-  {
-    id: 1,
-    date: '2025-07-10',
-    description: 'Salary',
-    amount: 5000,
-    type: 'credit',
-  },
-  {
-    id: 2,
-    date: '2025-07-11',
-    description: 'Groceries',
-    amount: -1200,
-    type: 'debit',
-  },
-  {
-    id: 3,
-    date: '2025-07-12',
-    description: 'Freelance',
-    amount: 2000,
-    type: 'credit',
-  },
-  {
-    id: 4,
-    date: '2025-07-10',
-    description: 'Salary',
-    amount: 5000,
-    type: 'credit',
-  },
-  {
-    id: 5,
-    date: '2025-07-11',
-    description: 'Groceries',
-    amount: -1200,
-    type: 'debit',
-  },
-  {
-    id: 6,
-    date: '2025-07-12',
-    description: 'Freelance',
-    amount: 2000,
-    type: 'credit',
-  },
-  {
-    id: 7,
-    date: '2025-07-10',
-    description: 'Salary',
-    amount: 5000,
-    type: 'credit',
-  },
-  {
-    id: 8,
-    date: '2025-07-11',
-    description: 'Groceries',
-    amount: -1200,
-    type: 'debit',
-  },
-  {
-    id: 9,
-    date: '2025-07-12',
-    description: 'Freelance',
-    amount: 2000,
-    type: 'credit',
-  },
-  {
-    id: 10,
-    date: '2025-07-10',
-    description: 'Salary',
-    amount: 5000,
-    type: 'credit',
-  },
-  {
-    id: 11,
-    date: '2025-07-11',
-    description: 'Groceries',
-    amount: -1200,
-    type: 'debit',
-  },
-  {
-    id: 12,
-    date: '2025-07-12',
-    description: 'Freelance',
-    amount: 2000,
-    type: 'credit',
-  },
-  {
-    id: 13,
-    date: '2025-07-10',
-    description: 'Salary',
-    amount: 5000,
-    type: 'credit',
-  },
-  {
-    id: 14,
-    date: '2025-07-11',
-    description: 'Groceries',
-    amount: -1200,
-    type: 'debit',
-  },
-  {
-    id: 15,
-    date: '2025-07-12',
-    description: 'Freelance',
-    amount: 2000,
-    type: 'credit',
-  },
-  {
-    id: 16,
-    date: '2025-07-10',
-    description: 'Salary',
-    amount: 5000,
-    type: 'credit',
-  },
-  {
-    id: 17,
-    date: '2025-07-11',
-    description: 'Groceries',
-    amount: -1200,
-    type: 'debit',
-  },
-  {
-    id: 18,
-    date: '2025-07-12',
-    description: 'Freelance',
-    amount: 2000,
-    type: 'credit',
-  },
-];
-
-const tableJson = {
-  headings: headings,
-  body: data,
+const tableJson: { headings: Heading<Transaction>[]; body: Transaction[] } = {
+  headings: [
+    {
+      name: 'Id',
+      accessor: 'id',
+      editable: true,
+      className: (value) => (value === 1 ? 'bg-red-300 text-white' : ''),
+    },
+    { name: 'Date', accessor: 'date', editable: true },
+    {
+      name: 'Description',
+      editable: true,
+      accessor: 'description',
+      className: (value) => (value === 'Salary' ? 'bg-red-300 text-white' : ''),
+    },
+    {
+      name: 'Amount',
+      accessor: 'amount',
+      render: (value) => `₹${Math.abs(value).toLocaleString()}`,
+      className: (value) => (value < 0 ? 'text-red-500' : 'text-green-600'),
+    },
+    { name: 'Type', accessor: 'type' },
+    {
+      name: 'Action',
+      accessor: 'action',
+      render: (_value, row) => (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="p-1 hover:bg-gray-200 rounded">
+              <SlOptions className="w-4 h-4" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuItem
+              onClick={() => alert(`Editing ${row.description + ' ' + row.id}`)}
+            >
+              Edit
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                alert(`Deleting ${row.description + ' ' + row.id}`)
+              }
+            >
+              Delete
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() => alert(`Sharing ${row.description + ' ' + row.id}`)}
+            >
+              Share
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ),
+    },
+  ],
+  body: [
+    {
+      id: 1,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 2,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 3,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
+    {
+      id: 4,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 5,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 6,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
+    {
+      id: 7,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 8,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 9,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
+    {
+      id: 10,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 11,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 12,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
+    {
+      id: 13,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 14,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 15,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
+    {
+      id: 16,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 17,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 18,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
+  ],
 };
 
 const columnHelper = createColumnHelper<Transaction>();
