@@ -219,12 +219,17 @@ const data = [
   },
 ];
 
+const tableJson = {
+  headings: headings,
+  body: data,
+};
+
 const columnHelper = createColumnHelper<Transaction>();
 
 const TableComp = () => {
   const tablePerRows = 5;
   const [tableData, setTableData] = useState<Transaction[]>(
-    data as Transaction[],
+    tableJson.body as Transaction[],
   );
   const [editingCell, setEditingCell] = useState<{
     rowId: number;
@@ -244,7 +249,7 @@ const TableComp = () => {
     setTableData(newData as Transaction[]);
   };
 
-  const columns = headings.map((heading) => {
+  const columns = tableJson.headings.map((heading: any) => {
     return columnHelper.accessor(heading.accessor as any, {
       header: () => (
         <div className="bg-[#F7AB79] h-full flex justify-center items-end">
