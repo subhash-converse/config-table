@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import {
@@ -9,15 +7,15 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { TableElement } from '@/components/widgets/table/table-comp';
-import { SlOptions } from 'react-icons/sl';
+// import { SlOptions } from 'react-icons/sl';
 import { Button } from '@/components/ui/button';
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+// import {
+//   DropdownMenu,
+//   DropdownMenuContent,
+//   DropdownMenuItem,
+//   DropdownMenuTrigger,
+// } from '@/components/ui/dropdown-menu';
 
 type Transaction = {
   id: number;
@@ -28,68 +26,40 @@ type Transaction = {
   action?: React.ReactNode;
 };
 
-type Heading<T> = {
+interface Heading<T> {
   name: string;
-  accessor: keyof T;
+  accessor?: string;
   render?: (value: any, row: T) => React.ReactNode;
-  editable?: boolean;
   className?: (value: any, row: T) => string;
+  editable?: boolean;
   width?: string | number;
-};
+}
 
-const tableJson: { headings: Heading<Transaction>[]; body: Transaction[] } = {
-  headings: [
+const tableJson: { headers: Heading<Transaction>[]; body: Transaction[] } = {
+  headers: [
     {
       name: 'Id',
-      accessor: 'id',
       editable: true,
-      className: (value) => (value === 1 ? 'bg-red-300 text-white' : ''),
     },
-    { name: 'Date', accessor: 'date', editable: true },
+    {
+      name: 'Date',
+      editable: true
+    },
     {
       name: 'Description',
       editable: true,
-      accessor: 'description',
-      className: (value) => (value === 'Salary' ? 'bg-red-300 text-white' : ''),
     },
     {
       name: 'Amount',
-      accessor: 'amount',
-      render: (value) => `₹${Math.abs(value).toLocaleString()}`,
-      className: (value) => (value < 0 ? 'text-red-500' : 'text-green-600'),
+      editable: false,
     },
-    { name: 'Type', accessor: 'type' },
+    {
+      name: 'Type',
+      editable: false,
+    },
     {
       name: 'Action',
-      accessor: 'action',
-      render: (_value, row) => (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="p-1 hover:bg-gray-200 rounded">
-              <SlOptions className="w-4 h-4" />
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem
-              onClick={() => alert(`Editing ${row.description + ' ' + row.id}`)}
-            >
-              Edit
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                alert(`Deleting ${row.description + ' ' + row.id}`)
-              }
-            >
-              Delete
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => alert(`Sharing ${row.description + ' ' + row.id}`)}
-            >
-              Share
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      ),
+      editable: false,
     },
   ],
   body: [
@@ -219,13 +189,107 @@ const tableJson: { headings: Heading<Transaction>[]; body: Transaction[] } = {
       amount: 2000,
       type: 'credit',
     },
+    {
+      id: 16,
+      date: '2025-07-10',
+      description: 'Salary',
+      amount: 5000,
+      type: 'credit',
+    },
+    {
+      id: 17,
+      date: '2025-07-11',
+      description: 'Groceries',
+      amount: -1200,
+      type: 'debit',
+    },
+    {
+      id: 18,
+      date: '2025-07-12',
+      description: 'Freelance',
+      amount: 2000,
+      type: 'credit',
+    },
   ],
 };
+
+const modifiedHeadings: Heading<Transaction>[] = tableJson.headers.map((col) => {
+  const accessor = (col.name).toLocaleLowerCase();
+  // if (accessor === 'id') {
+  //   return {
+  //     ...col,
+  //     accessor,
+  //     className: (value: any) => (value == 1 ? 'bg-red-300 text-white' : ''),
+  //      render: (value:any) =>value,
+  //   };
+  // }
+
+  // if (accessor === 'description') {
+  //   return {
+  //     ...col,
+  //     accessor,
+  //     className: (value: any) =>
+  //       value === 'Salary' ? 'bg-red-300 text-white' : '',
+  //      render: (value:any) =>value,
+  //   };
+  // }
+
+  // if (accessor === 'amount') {
+  //   return {
+  //     ...col,
+  //     accessor,
+  //     render: (value: number) => `₹${Math.abs(value).toLocaleString()}`,
+  //     className: (value: number) =>
+  //       value < 0 ? 'text-red-500' : 'text-green-600',
+  //   };
+  // }
+
+  // if (accessor === 'action') {
+  //   return {
+  //     ...col,
+  //     accessor,
+  //     render: (_value: any, row: any) => (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <button className="p-1 hover:bg-gray-200 rounded">
+  //             <SlOptions className="w-4 h-4" />
+  //           </button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end">
+  //           <DropdownMenuItem
+  //             onClick={() =>
+  //               alert(`Editing ${row.description + ' ' + row.id}`)
+  //             }
+  //           >
+  //             Edit
+  //           </DropdownMenuItem>
+  //           <DropdownMenuItem
+  //             onClick={() =>
+  //               alert(`Deleting ${row.description + ' ' + row.id}`)
+  //             }
+  //           >
+  //             Delete
+  //           </DropdownMenuItem>
+  //           <DropdownMenuItem
+  //             onClick={() =>
+  //               alert(`Sharing ${row.description + ' ' + row.id}`)
+  //             }
+  //           >
+  //             Share
+  //           </DropdownMenuItem>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     ),
+  //   };
+  // }
+
+  return { ...col, accessor };
+});
 
 const columnHelper = createColumnHelper<Transaction>();
 
 const TableComp = () => {
-  const tablePerRows = 5;
+  const tablePerRows = 10;
   const [tableData, setTableData] = useState<Transaction[]>(
     tableJson.body as Transaction[],
   );
@@ -247,8 +311,9 @@ const TableComp = () => {
     setTableData(newData as Transaction[]);
   };
 
-  const columns = tableJson.headings.map((heading: any) => {
+  const columns = modifiedHeadings.map((heading: any) => {
     return columnHelper.accessor(heading.accessor as any, {
+      id: heading.accessor,
       header: () => (
         <div className="bg-[#F7AB79] h-full flex justify-center items-end">
           {heading.name}
@@ -306,7 +371,7 @@ const TableComp = () => {
                   )}
                 >
                   <Button
-                    className="bg-transparent"
+                    className="bg-white"
                     variant="outline"
                     onClick={() => {
                       setEditedValue(savedValue);

@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Link, Outlet } from 'react-router-dom';
@@ -56,7 +54,7 @@ export const modules = [
 
 const SidebarLayout = () => {
   const [open, setOpen] = useState(true);
-  const [profile, setProfile] = useState(true);
+  const [profile, setProfile] = useState(false);
 
   return (
     <div
@@ -260,10 +258,7 @@ const SidebarLayout = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-rows-[65px_1fr]">
-        <div className="border-b border-gray-400 flex justify-center items-center">
-          Top-nav Bar
-        </div>
+      <div className="grid grid-rows-[1fr]">
         <div className="">
           <Outlet />
         </div>

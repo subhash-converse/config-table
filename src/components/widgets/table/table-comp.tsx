@@ -1,5 +1,3 @@
-'use client';
-
 import { flexRender, type Table as TanstackTable } from '@tanstack/react-table';
 
 import {
@@ -14,7 +12,7 @@ import {
 export function TableElement<T>({ table }: { table: TanstackTable<T> }) {
   return (
     <div className="rounded-md border">
-      <Table className="table-fixed ">
+      <Table className="table-fixed border-[2px] border-[#F7AB79]">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
