@@ -29,19 +29,15 @@
 
 .icon-arrow-swap:before {
   content: '\e900';
-  color: #fff;
 }
 .icon-box:before {
   content: '\e901';
-  color: #fff;
 }
 .icon-card:before {
   content: '\e902';
-  color: #fff;
 }
 .icon-chat:before {
   content: '\e903';
-  color: #fff;
 }
 .icon-clock:before {
   content: '\e904';
@@ -54,11 +50,9 @@
 }
 .icon-file:before {
   content: '\e907';
-  color: #fff;
 }
 .icon-home:before {
   content: '\e909';
-  color: #fff;
 }
 .icon-link-logo:before {
   content: '\e90a';
@@ -68,29 +62,24 @@
 }
 .icon-logo:before {
   content: '\e90c';
-  color: #fff;
 }
 .icon-mail:before {
   content: '\e90d';
-  color: #fff;
 }
 .icon-notification:before {
   content: '\e90e';
-  color: #fff;
 }
 .icon-phone:before {
   content: '\e90f';
 }
 .icon-right-arrow:before {
   content: '\e910';
-  color: #fff;
 }
 .icon-user-admin:before {
   content: '\e911';
 }
 .icon-wallet-export:before {
   content: '\e912';
-  color: #fff;
 }
 .icon-website:before {
   content: '\e913';

@@ -1,3 +1,4 @@
+import DynamicTabs from '@/components/custom/dynamic-tabs';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -143,8 +144,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.business_type
                             ? business_type.find(
-                                (o: any) => o.value === selected.business_type,
-                              )?.label
+                              (o: any) => o.value === selected.business_type,
+                            )?.label
                             : 'Gross'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -189,8 +190,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.ceded_type
                             ? ceded_type.find(
-                                (o) => o.code === selected.ceded_type,
-                              )?.label
+                              (o) => o.code === selected.ceded_type,
+                            )?.label
                             : 'Ceded Type'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -229,9 +230,9 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.accident_period
                             ? accident_period.find(
-                                (o: any) =>
-                                  o.value === selected.accident_period,
-                              )?.label
+                              (o: any) =>
+                                o.value === selected.accident_period,
+                            )?.label
                             : 'Accident Period'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -272,9 +273,9 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.development_period
                             ? development_period.find(
-                                (o: any) =>
-                                  o.value === selected.development_period,
-                              )?.label
+                              (o: any) =>
+                                o.value === selected.development_period,
+                            )?.label
                             : 'Development Period'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -317,11 +318,11 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.triangle_type
                             ? triangle_type.find(
-                                (o) => o.value === selected.triangle_type,
-                              )?.label
+                              (o) => o.value === selected.triangle_type,
+                            )?.label
                             : 'Triangle Type'}
                         </div>
-                        <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
+                        <i className="icon-right-arrow rotate-90 !text-[#ABB5BE] text-[20px]"></i>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent style={{ width: triggerWidth }}>
@@ -373,7 +374,10 @@ export default function HomePage() {
           )}
         </div>
         <div className={cn('flex-1 px-[42px] pr-[34px]')}>
-          <div className={cn('h-full border-[#FB4E0B]  border-[2px] p-4')}>
+          <div className={cn('h-full border-[#FB4E0B]  border-[2px] grid grid-rows-[auto_1fr]')}>
+            <div className=' grid grid-cols-7'>
+              <DynamicTabs />
+            </div>
             <TableComp />
           </div>
         </div>

@@ -6,7 +6,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { TableElement } from '@/components/widgets/table/table-comp';
+import { TableElement } from '@/components/widgets/table/table-component';
 // import { SlOptions } from 'react-icons/sl';
 import { Button } from '@/components/ui/button';
 import { FaRegEdit } from 'react-icons/fa';
@@ -42,7 +42,7 @@ const tableJson: { headers: Heading<Transaction>[]; body: Transaction[] } = {
   headers: [
     {
       name: 'Id',
-      editable: true,
+      editable: false,
     },
     {
       name: 'Date',
@@ -54,7 +54,7 @@ const tableJson: { headers: Heading<Transaction>[]; body: Transaction[] } = {
     },
     {
       name: 'Amount',
-      editable: false,
+      editable: true,
     },
     {
       name: 'Type',
@@ -306,24 +306,6 @@ const TableComp = () => {
     column: string;
   } | null>(null);
 
-  const updateRow = (id: number, newValue: string | number, key: string) => {
-    const newData = tableEditedData.map((item) =>
-      item.id === id ? { ...item, [key]: newValue ? newValue : '' } : item,
-    );
-
-    setTableEditedData(newData as Transaction[]);
-  };
-
-  const saveData = () => {
-    setTableData(tableEditedData);
-    setEditingCell(null);
-  };
-
-  const discardEditedData = () => {
-    setTableEditedData(tableData);
-    setEditingCell(null);
-  };
-
   const columns = modifiedHeadings.map((heading: any) => {
     return columnHelper.accessor(heading.accessor as any, {
       id: heading.accessor,
@@ -343,7 +325,7 @@ const TableComp = () => {
         const isEditedCellValue =
           info.getValue() !==
           (tableData[info.row.index] as Transaction)[
-            heading.accessor as keyof Transaction
+          heading.accessor as keyof Transaction
           ];
 
         const isEditing =
@@ -459,30 +441,50 @@ const TableComp = () => {
     },
   });
 
+  const updateRow = (id: number, newValue: string | number, key: string) => {
+    const newData = tableEditedData.map((item) =>
+      item.id === id ? { ...item, [key]: newValue ? newValue : '' } : item,
+    );
+
+    setTableEditedData(newData as Transaction[]);
+  };
+
+  const saveData = () => {
+    setTableData(tableEditedData);
+    setEditingCell(null);
+  };
+
+  const discardEditedData = () => {
+    setTableEditedData(tableData);
+    setEditingCell(null);
+  };
+
   return (
-    <div className={cn('rounded-[7px] p-4')}>
-      <TableElement table={table} />
-      <div className="flex justify-end pt-3 gap-3">
-        <Button
-          className="bg-white cursor-pointer"
-          disabled={isEditedData}
-          variant="outline"
-          onClick={() => {
-            discardEditedData();
-          }}
-        >
-          Discard
-        </Button>
-        <Button
-          className="bg-[#F7AB79] hover:bg-[#d39a75] !text-white cursor-pointer"
-          disabled={isEditedData}
-          variant="outline"
-          onClick={() => {
-            saveData();
-          }}
-        >
-          Save
-        </Button>
+    <div className={cn('rounded-[7px] h-full grid grid-rows-[1fr_auto]')}>
+      <div className='px-8 grid items-center'>
+        <TableElement table={table} />
+        <div className="flex justify-end pt-3 gap-3">
+          <Button
+            className="bg-white cursor-pointer"
+            disabled={isEditedData}
+            variant="outline"
+            onClick={() => {
+              discardEditedData();
+            }}
+          >
+            Discard
+          </Button>
+          <Button
+            className="bg-[#F7AB79] hover:bg-[#d39a75] !text-white cursor-pointer"
+            disabled={isEditedData}
+            variant="outline"
+            onClick={() => {
+              saveData();
+            }}
+          >
+            Save
+          </Button>
+        </div>
       </div>
     </div>
   );
