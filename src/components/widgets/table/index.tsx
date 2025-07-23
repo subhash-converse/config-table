@@ -43,7 +43,7 @@ const tableJson: { headers: Heading<Transaction>[]; body: Transaction[] } = {
     },
     {
       name: 'Date',
-      editable: true
+      editable: true,
     },
     {
       name: 'Description',
@@ -213,78 +213,79 @@ const tableJson: { headers: Heading<Transaction>[]; body: Transaction[] } = {
   ],
 };
 
-const modifiedHeadings: Heading<Transaction>[] = tableJson.headers.map((col) => {
-  const accessor = (col.name).toLocaleLowerCase();
-  // if (accessor === 'id') {
-  //   return {
-  //     ...col,
-  //     accessor,
-  //     className: (value: any) => (value == 1 ? 'bg-red-300 text-white' : ''),
-  //      render: (value:any) =>value,
-  //   };
-  // }
+const modifiedHeadings: Heading<Transaction>[] = tableJson.headers.map(
+  (col) => {
+    const accessor = col.name.toLocaleLowerCase().replaceAll(' ', '_');
+    // if (accessor === 'id') {
+    //   return {
+    //     ...col,
+    //     accessor,
+    //     className: (value: any) => (value == 1 ? 'bg-red-300 text-white' : ''),
+    //      render: (value:any) =>value,
+    //   };
+    // }
 
-  // if (accessor === 'description') {
-  //   return {
-  //     ...col,
-  //     accessor,
-  //     className: (value: any) =>
-  //       value === 'Salary' ? 'bg-red-300 text-white' : '',
-  //      render: (value:any) =>value,
-  //   };
-  // }
+    // if (accessor === 'description') {
+    //   return {
+    //     ...col,
+    //     accessor,
+    //     className: (value: any) =>
+    //       value === 'Salary' ? 'bg-red-300 text-white' : '',
+    //      render: (value:any) =>value,
+    //   };
+    // }
 
-  // if (accessor === 'amount') {
-  //   return {
-  //     ...col,
-  //     accessor,
-  //     render: (value: number) => `₹${Math.abs(value).toLocaleString()}`,
-  //     className: (value: number) =>
-  //       value < 0 ? 'text-red-500' : 'text-green-600',
-  //   };
-  // }
+    // if (accessor === 'amount') {
+    //   return {
+    //     ...col,
+    //     accessor,
+    //     render: (value: number) => `₹${Math.abs(value).toLocaleString()}`,
+    //     className: (value: number) =>
+    //       value < 0 ? 'text-red-500' : 'text-green-600',
+    //   };
+    // }
 
-  // if (accessor === 'action') {
-  //   return {
-  //     ...col,
-  //     accessor,
-  //     render: (_value: any, row: any) => (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger asChild>
-  //           <button className="p-1 hover:bg-gray-200 rounded">
-  //             <SlOptions className="w-4 h-4" />
-  //           </button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent align="end">
-  //           <DropdownMenuItem
-  //             onClick={() =>
-  //               alert(`Editing ${row.description + ' ' + row.id}`)
-  //             }
-  //           >
-  //             Edit
-  //           </DropdownMenuItem>
-  //           <DropdownMenuItem
-  //             onClick={() =>
-  //               alert(`Deleting ${row.description + ' ' + row.id}`)
-  //             }
-  //           >
-  //             Delete
-  //           </DropdownMenuItem>
-  //           <DropdownMenuItem
-  //             onClick={() =>
-  //               alert(`Sharing ${row.description + ' ' + row.id}`)
-  //             }
-  //           >
-  //             Share
-  //           </DropdownMenuItem>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     ),
-  //   };
-  // }
-
-  return { ...col, accessor };
-});
+    // if (accessor === 'action') {
+    //   return {
+    //     ...col,
+    //     accessor,
+    //     render: (_value: any, row: any) => (
+    //       <DropdownMenu>
+    //         <DropdownMenuTrigger asChild>
+    //           <button className="p-1 hover:bg-gray-200 rounded">
+    //             <SlOptions className="w-4 h-4" />
+    //           </button>
+    //         </DropdownMenuTrigger>
+    //         <DropdownMenuContent align="end">
+    //           <DropdownMenuItem
+    //             onClick={() =>
+    //               alert(`Editing ${row.description + ' ' + row.id}`)
+    //             }
+    //           >
+    //             Edit
+    //           </DropdownMenuItem>
+    //           <DropdownMenuItem
+    //             onClick={() =>
+    //               alert(`Deleting ${row.description + ' ' + row.id}`)
+    //             }
+    //           >
+    //             Delete
+    //           </DropdownMenuItem>
+    //           <DropdownMenuItem
+    //             onClick={() =>
+    //               alert(`Sharing ${row.description + ' ' + row.id}`)
+    //             }
+    //           >
+    //             Share
+    //           </DropdownMenuItem>
+    //         </DropdownMenuContent>
+    //       </DropdownMenu>
+    //     ),
+    //   };
+    // }
+    return { ...col, accessor };
+  },
+);
 
 const columnHelper = createColumnHelper<Transaction>();
 
@@ -301,8 +302,6 @@ const TableComp = () => {
   const [savedValue, setSavededValue] = useState<string | number>('');
 
   const updateRow = (id: number, newValue: string | number, key: string) => {
-    console.log(newValue);
-    console.log(editedValue, 'edit');
     const newData = tableData.map((item) =>
       item.id === id
         ? { ...item, [key]: newValue ? newValue : editedValue }
@@ -315,7 +314,7 @@ const TableComp = () => {
     return columnHelper.accessor(heading.accessor as any, {
       id: heading.accessor,
       header: () => (
-        <div className="bg-[#F7AB79] h-full flex justify-center items-end">
+        <div className="bg-[#F7AB79] text-white h-full flex justify-center items-center">
           {heading.name}
         </div>
       ),
@@ -339,14 +338,15 @@ const TableComp = () => {
           return (
             <div
               className={cn(
+                '',
                 info.row.index === tablePerRows - 1
-                  ? 'flex flex-col-reverse gap-1'
-                  : 'flex flex-col gap-1',
+                  ? 'flex justify-center flex-col-reverse gap-1'
+                  : 'flex justify-center flex-col gap-1',
               )}
             >
-              <div>
+              <div className="px-1 ">
                 <input
-                  className="border px-2 py-1 w-full"
+                  className="border px-2 py-1 w-full bg-white"
                   value={editedValue}
                   autoFocus
                   onChange={(e) => setEditedValue(e.target.value)}
@@ -371,7 +371,7 @@ const TableComp = () => {
                   )}
                 >
                   <Button
-                    className="bg-white"
+                    className="bg-white cursor-pointer"
                     variant="outline"
                     onClick={() => {
                       setEditedValue(savedValue);
@@ -381,7 +381,7 @@ const TableComp = () => {
                     Discard
                   </Button>
                   <Button
-                    className="bg-[#F7AB79] hover:bg-[#c59575] text-white"
+                    className="bg-[#F7AB79] hover:bg-[#d39a75] !text-white cursor-pointer"
                     variant="outline"
                     onClick={() => {
                       updateRow(row.id, editedValue, heading.accessor);

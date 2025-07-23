@@ -12,7 +12,7 @@ import {
 export function TableElement<T>({ table }: { table: TanstackTable<T> }) {
   return (
     <div className="rounded-md border">
-      <Table className="table-fixed border-[2px] border-[#F7AB79]">
+      <Table className="table-fixed rounded-[3px] overflow-hidden">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

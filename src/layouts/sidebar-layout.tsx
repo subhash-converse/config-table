@@ -258,9 +258,17 @@ const SidebarLayout = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-rows-[1fr]">
+      <div className="grid grid-rows-[1fr_57px] ">
         <div className="">
           <Outlet />
+        </div>
+        <div className="flex justify-between items-center text-[#4A4B53] text-[15px] font-semibold px-16 border-t border-[#D8D9D4]">
+          <div className="cursor-pointer">Change User Profile</div>
+          <div className="flex gap-8">
+            <div className="cursor-pointer">Terms & Conditions</div>
+            <div className="cursor-pointer">FAQ</div>
+            <div className="cursor-pointer">Contact Us</div>
+          </div>
         </div>
       </div>
     </div>

@@ -136,4 +136,5 @@
 table tbody tr td,
 table thead tr th {
   padding: 0px !important;
+  border: 1px solid #363636;
 }
