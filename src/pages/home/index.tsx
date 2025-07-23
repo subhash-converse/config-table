@@ -59,6 +59,15 @@ const triangle_type: { label: string; value: TriangleType }[] = [
   { value: 'Settled Claims', label: 'Settled Claims' },
 ];
 
+const tabContent: string[] = [
+  "Triangle",
+  "Increment Age to Age",
+  "Benchmark Upload",
+  "Pattern Selection",
+  "Check Fit",
+  "Results Impact"
+];
+
 export default function HomePage() {
   const [selectOpen, setSelectOpen] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
@@ -376,7 +385,7 @@ export default function HomePage() {
         <div className={cn('flex-1 px-[42px] pr-[34px]')}>
           <div className={cn('h-full border-[#FB4E0B]  border-[2px] grid grid-rows-[auto_1fr]')}>
             <div className=' grid grid-cols-7'>
-              <DynamicTabs />
+              <DynamicTabs options={tabContent} onClick={(value)=>{console.log(value)}}/>
             </div>
             <TableComp />
           </div>

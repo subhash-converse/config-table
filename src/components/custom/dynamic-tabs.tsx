@@ -2,27 +2,19 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
-const DynamicTabs = () => {
-    const tabContent: string[] = [
-        "Triangle",
-        "Increment Age to Age",
-        "Benchmark Upload",
-        "Pattern Selection",
-        "Check Fit",
-        "Results Impact"
-    ];
+const DynamicTabs = ({ options, onClick }: { options: string[], onClick: (value: string) => void }) => {
 
     const [selectedTab, setSelectedTab] = useState<string | null>()
 
     const handleClick = (item: string) => {
         const newValue = (item.toLocaleLowerCase()).replaceAll(" ", "_")
-        console.log("Clicked:", (item.toLocaleLowerCase()).replaceAll(" ", "_"));
         setSelectedTab((prev) => prev === newValue ? prev : newValue)
+        onClick(newValue)
     };
 
     return (
         <>
-            {tabContent.map((item, index) => (
+            {options.map((item, index) => (
                 <Button
                     key={index}
                     onClick={() => handleClick(item)}
