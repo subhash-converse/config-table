@@ -11,8 +11,8 @@ import {
 
 export function TableElement<T>({ table }: { table: TanstackTable<T> }) {
   return (
-    <div className="rounded-md border">
-      <Table className="table-fixed rounded-[3px] overflow-hidden">
+    <div className="overflow-hidden rounded-[3px]">
+      <Table className="table-fixed">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

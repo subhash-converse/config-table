@@ -86,13 +86,13 @@ export default function HomePage() {
   }, [open]);
 
   return (
-    <div className="h-full grid grid-rows-[65px_1fr] px-5 pb-4">
-      <div className="200 pt-4 grid grid-cols-[237px_1fr]">
+    <div className="h-full grid grid-rows-[65px_1fr] px-[17px] pb-4">
+      <div className="200 pt-3 grid grid-cols-[237px_1fr]">
         <div className="bg-[#FB4E0B] rounded-md pl-6 flex items-center text-[18px] text-white font-medium">
           Selected Profiles
         </div>
-        <div className="px-5">
-          <div className="h-full border border-[#898C81] rounded-md w-full grid grid-cols-4 py-[7px] justify-around px-12 gap-12 text-[18px] text-[#6C757D] font-medium">
+        <div className="px-[42px] pr-[34px]">
+          <div className="h-full border border-[#898C81] rounded-md w-full grid grid-cols-4 py-[6px] justify-around px-12 gap-[60px] text-[18px] text-[#6C757D] font-medium">
             <div className="h-full border border-[#FB4E0B] rounded-md pl-6 flex items-center">
               Aerospace
             </div>
@@ -108,7 +108,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className={cn('flex py-4 h-full ')}>
+      <div className={cn('flex py-4 pt-[22px] h-full ')}>
         <div
           className={cn(
             'duration-500 overflow-hidden grid',
@@ -372,7 +372,7 @@ export default function HomePage() {
             </div>
           )}
         </div>
-        <div className={cn('flex-1 px-5')}>
+        <div className={cn('flex-1 px-[42px] pr-[34px]')}>
           <div className={cn('h-full border-[#FB4E0B]  border-[2px] p-4')}>
             <TableComp />
           </div>
