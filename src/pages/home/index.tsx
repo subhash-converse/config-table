@@ -8,65 +8,17 @@ import {
 } from '@/components/ui/popover';
 import TableComp from '@/components/widgets/table';
 import { cn } from '@/lib/utils';
+import {
+  accident_period,
+  business_type,
+  ceded_type,
+  development_period,
+  tabContent,
+  triangle_type,
+} from '@/mock-data/src/pages/home';
+import type { SelectedState } from '@/types/src/pages/home';
 import { useEffect, useRef, useState } from 'react';
 import { RiCollapseDiagonalLine } from 'react-icons/ri';
-
-type BusinessType = 'gross' | 'ceded_treaty' | 'ceded_fac' | 'non_ri';
-type AccidentPeriod = 'Yearly' | 'Quarterly' | 'Monthly';
-type DevelopmentPeriod = 'Yearly' | 'Quarterly' | 'Monthly';
-type TriangleType =
-  | 'Incurred Loss'
-  | 'Paid Loss'
-  | 'Reported Claims'
-  | 'Settled Claims';
-
-interface SelectedState {
-  business_type: string;
-  ceded_type: string;
-  accident_period: string;
-  development_period: string;
-  triangle_type: string;
-}
-
-const business_type: { label: string; value: BusinessType }[] = [
-  { label: 'Gross', value: 'gross' },
-  { label: 'Ceded Treaty', value: 'ceded_treaty' },
-  { label: 'Ceded FAC', value: 'ceded_fac' },
-  { label: 'Non-RI', value: 'non_ri' },
-];
-
-const ceded_type: { code: string; label: string }[] = [
-  { code: 'QS', label: 'RI QS' },
-  { code: 'XOL', label: 'RI XOL' },
-];
-
-const accident_period: { label: string; value: AccidentPeriod }[] = [
-  { value: 'Yearly', label: 'Yearly' },
-  { value: 'Quarterly', label: 'Quarterly' },
-  { value: 'Monthly', label: 'Monthly' },
-];
-
-const development_period: { label: string; value: DevelopmentPeriod }[] = [
-  { value: 'Yearly', label: 'Yearly' },
-  { value: 'Quarterly', label: 'Quarterly' },
-  { value: 'Monthly', label: 'Monthly' },
-];
-
-const triangle_type: { label: string; value: TriangleType }[] = [
-  { value: 'Incurred Loss', label: 'Incurred Loss' },
-  { value: 'Paid Loss', label: 'Paid Loss' },
-  { value: 'Reported Claims', label: 'Reported Claims' },
-  { value: 'Settled Claims', label: 'Settled Claims' },
-];
-
-const tabContent: string[] = [
-  "Triangle",
-  "Increment Age to Age",
-  "Benchmark Upload",
-  "Pattern Selection",
-  "Check Fit",
-  "Results Impact"
-];
 
 export default function HomePage() {
   const [selectOpen, setSelectOpen] = useState<string | null>(null);
@@ -153,8 +105,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.business_type
                             ? business_type.find(
-                              (o: any) => o.value === selected.business_type,
-                            )?.label
+                                (o: any) => o.value === selected.business_type,
+                              )?.label
                             : 'Gross'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -199,8 +151,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.ceded_type
                             ? ceded_type.find(
-                              (o) => o.code === selected.ceded_type,
-                            )?.label
+                                (o) => o.code === selected.ceded_type,
+                              )?.label
                             : 'Ceded Type'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -239,9 +191,9 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.accident_period
                             ? accident_period.find(
-                              (o: any) =>
-                                o.value === selected.accident_period,
-                            )?.label
+                                (o: any) =>
+                                  o.value === selected.accident_period,
+                              )?.label
                             : 'Accident Period'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -282,9 +234,9 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.development_period
                             ? development_period.find(
-                              (o: any) =>
-                                o.value === selected.development_period,
-                            )?.label
+                                (o: any) =>
+                                  o.value === selected.development_period,
+                              )?.label
                             : 'Development Period'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -327,8 +279,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.triangle_type
                             ? triangle_type.find(
-                              (o) => o.value === selected.triangle_type,
-                            )?.label
+                                (o) => o.value === selected.triangle_type,
+                              )?.label
                             : 'Triangle Type'}
                         </div>
                         <i className="icon-right-arrow rotate-90 !text-[#ABB5BE] text-[20px]"></i>
@@ -383,9 +335,18 @@ export default function HomePage() {
           )}
         </div>
         <div className={cn('flex-1 px-[42px] pr-[34px]')}>
-          <div className={cn('h-full border-[#FB4E0B]  border-[2px] grid grid-rows-[auto_1fr]')}>
-            <div className=' grid grid-cols-7'>
-              <DynamicTabs options={tabContent} onClick={(value)=>{console.log(value)}}/>
+          <div
+            className={cn(
+              'h-full border-[#FB4E0B]  border-[2px] grid grid-rows-[auto_1fr]',
+            )}
+          >
+            <div className=" grid grid-cols-7">
+              <DynamicTabs
+                options={tabContent}
+                onClick={(value) => {
+                  console.log(value);
+                }}
+              />
             </div>
             <TableComp />
           </div>

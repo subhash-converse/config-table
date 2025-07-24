@@ -7,218 +7,22 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { TableElement } from '@/components/widgets/table/table-component';
+// Note : for future purpose
 // import { SlOptions } from 'react-icons/sl';
 import { Button } from '@/components/ui/button';
 import { FaRegEdit } from 'react-icons/fa';
 import { MdOutlineEdit } from 'react-icons/md';
 import _ from 'lodash';
-
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuItem,
-//   DropdownMenuTrigger,
-// } from '@/components/ui/dropdown-menu';
-
-type Transaction = {
-  id: number;
-  date: string;
-  description: string;
-  amount: number;
-  type: 'credit' | 'debit';
-  action?: React.ReactNode;
-};
-
-interface Heading<T> {
-  name: string;
-  accessor?: string;
-  render?: (value: any, row: T) => React.ReactNode;
-  className?: (value: any, row: T) => string;
-  editable?: boolean;
-  width?: string | number;
-}
-
-const tableJson: { headers: Heading<Transaction>[]; body: Transaction[] } = {
-  headers: [
-    {
-      name: 'Id',
-      editable: false,
-    },
-    {
-      name: 'Date',
-      editable: true,
-    },
-    {
-      name: 'Description',
-      editable: true,
-    },
-    {
-      name: 'Amount',
-      editable: true,
-    },
-    {
-      name: 'Type',
-      editable: false,
-    },
-    {
-      name: 'Action',
-      editable: false,
-    },
-  ],
-  body: [
-    {
-      id: 1,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 2,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 3,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-    {
-      id: 4,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 5,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 6,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-    {
-      id: 7,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 8,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 9,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-    {
-      id: 10,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 11,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 12,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-    {
-      id: 13,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 14,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 15,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-    {
-      id: 16,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 17,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 18,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-    {
-      id: 16,
-      date: '2025-07-10',
-      description: 'Salary',
-      amount: 5000,
-      type: 'credit',
-    },
-    {
-      id: 17,
-      date: '2025-07-11',
-      description: 'Groceries',
-      amount: -1200,
-      type: 'debit',
-    },
-    {
-      id: 18,
-      date: '2025-07-12',
-      description: 'Freelance',
-      amount: 2000,
-      type: 'credit',
-    },
-  ],
-};
+import type {
+  Heading,
+  Transaction,
+} from '@/types/src/components/widgets/table';
+import { tableJson } from '@/mock-data/src/components/widgets/table';
 
 const modifiedHeadings: Heading<Transaction>[] = tableJson.headers.map(
   (col) => {
     const accessor = col.name.toLocaleLowerCase().replaceAll(' ', '_');
+    // Note : for future purpose
     // if (accessor === 'id') {
     //   return {
     //     ...col,
@@ -325,7 +129,7 @@ const TableComp = () => {
         const isEditedCellValue =
           info.getValue() !==
           (tableData[info.row.index] as Transaction)[
-          heading.accessor as keyof Transaction
+            heading.accessor as keyof Transaction
           ];
 
         const isEditing =
@@ -364,7 +168,9 @@ const TableComp = () => {
                   }}
                 />
               </div>
-              {/* <div className="relative ">
+              {/* 
+              Note : for future purpose
+              <div className="relative ">
                 <div
                   className={cn(
                     info.row.index === tablePerRows - 1
@@ -461,7 +267,7 @@ const TableComp = () => {
 
   return (
     <div className={cn('rounded-[7px] h-full grid grid-rows-[1fr_auto]')}>
-      <div className='px-8 grid items-center'>
+      <div className="px-8 grid items-center">
         <TableElement table={table} />
         <div className="flex justify-end pt-3 gap-3">
           <Button
