@@ -16,9 +16,13 @@ import {
   tabContent,
   triangle_type,
 } from '@/mock-data/src/pages/home';
+import type { RootState } from '@/store';
+import { addOption } from '@/store/slices/filter-options';
 import type { SelectedState } from '@/types/src/pages/home';
 import { useEffect, useRef, useState } from 'react';
 import { RiCollapseDiagonalLine } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function HomePage() {
   const [selectOpen, setSelectOpen] = useState<string | null>(null);
@@ -26,8 +30,10 @@ export default function HomePage() {
   const [selected, setSelected] = useState<{ [key: string]: string }>({});
   const [triggerWidth, setTriggerWidth] = useState<number>(0);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const filterOptions = useSelector((state: RootState) => state.options);
+  const dispatch = useDispatch();
 
-  const handleSelect = <K extends keyof SelectedState>(
+  const handleSubmit = <K extends keyof SelectedState>(
     value: SelectedState[K],
     key: K,
   ) => {
@@ -37,6 +43,9 @@ export default function HomePage() {
         [key]: value,
       };
       setSelectOpen(null);
+      dispatch(addOption(updatedValue))
+      // Note: for dev purpose
+      console.log(filterOptions);
       return updatedValue;
     });
   };
@@ -105,8 +114,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.business_type
                             ? business_type.find(
-                                (o: any) => o.value === selected.business_type,
-                              )?.label
+                              (o: any) => o.value === selected.business_type,
+                            )?.label
                             : 'Gross'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -119,7 +128,7 @@ export default function HomePage() {
                             key={opt.value}
                             className="flex items-center space-x-2 cursor-pointer"
                             onClick={() =>
-                              handleSelect(opt.value, 'business_type')
+                              handleSubmit(opt.value, 'business_type')
                             }
                           >
                             <Checkbox
@@ -151,8 +160,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.ceded_type
                             ? ceded_type.find(
-                                (o) => o.code === selected.ceded_type,
-                              )?.label
+                              (o) => o.code === selected.ceded_type,
+                            )?.label
                             : 'Ceded Type'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -164,7 +173,7 @@ export default function HomePage() {
                           <label
                             key={opt.code}
                             className="flex items-center space-x-2 cursor-pointer"
-                            onClick={() => handleSelect(opt.code, 'ceded_type')}
+                            onClick={() => handleSubmit(opt.code, 'ceded_type')}
                           >
                             <Checkbox
                               className="data-[state=checked]:bg-[#FB4E0B] data-[state=checked]:border-[#FB4E0B]"
@@ -191,9 +200,9 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.accident_period
                             ? accident_period.find(
-                                (o: any) =>
-                                  o.value === selected.accident_period,
-                              )?.label
+                              (o: any) =>
+                                o.value === selected.accident_period,
+                            )?.label
                             : 'Accident Period'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -206,7 +215,7 @@ export default function HomePage() {
                             key={opt.value}
                             className="flex items-center space-x-2 cursor-pointer"
                             onClick={() =>
-                              handleSelect(opt.value, 'accident_period')
+                              handleSubmit(opt.value, 'accident_period')
                             }
                           >
                             <Checkbox
@@ -234,9 +243,9 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.development_period
                             ? development_period.find(
-                                (o: any) =>
-                                  o.value === selected.development_period,
-                              )?.label
+                              (o: any) =>
+                                o.value === selected.development_period,
+                            )?.label
                             : 'Development Period'}
                         </div>
                         <i className="icon-right-arrow rotate-90 text-[#ABB5BE] text-[20px]"></i>
@@ -249,7 +258,7 @@ export default function HomePage() {
                             key={opt.value}
                             className="flex items-center space-x-2 cursor-pointer"
                             onClick={() =>
-                              handleSelect(opt.value, 'development_period')
+                              handleSubmit(opt.value, 'development_period')
                             }
                           >
                             <Checkbox
@@ -279,8 +288,8 @@ export default function HomePage() {
                         <div className="text-start text-[#54595E] text-[16px]">
                           {selected.triangle_type
                             ? triangle_type.find(
-                                (o) => o.value === selected.triangle_type,
-                              )?.label
+                              (o) => o.value === selected.triangle_type,
+                            )?.label
                             : 'Triangle Type'}
                         </div>
                         <i className="icon-right-arrow rotate-90 !text-[#ABB5BE] text-[20px]"></i>
@@ -293,7 +302,7 @@ export default function HomePage() {
                             key={opt.value}
                             className="flex items-center space-x-2 cursor-pointer"
                             onClick={() =>
-                              handleSelect(opt.value, 'triangle_type')
+                              handleSubmit(opt.value, 'triangle_type')
                             }
                           >
                             <Checkbox
