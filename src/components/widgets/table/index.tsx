@@ -249,7 +249,7 @@ const TableComp = () => {
 
   const updateRow = (id: number, newValue: string | number, key: string) => {
     const newData = tableEditedData.map((item) =>
-      item.id === id ? { ...item, [key]: newValue ? newValue : '' } : item,
+      item.id === id ? { ...item, [key]: newValue ? key === "amount" ? Number(newValue) : newValue : '' } : item,
     );
 
     setTableEditedData(newData as Transaction[]);
