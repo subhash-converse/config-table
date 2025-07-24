@@ -8,7 +8,7 @@ export default function AboutPage() {
           Vite, React, and Tailwind CSS.
         </p>
         <p className="mb-4">
-          Our team is passionate about delivering fast, reliable, and
+          Our team  is passionate about delivering fast, reliable, and
           maintainable web experiences.
         </p>
         <p>
