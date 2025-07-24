@@ -1,11 +1,11 @@
 export type BusinessType = 'gross' | 'ceded_treaty' | 'ceded_fac' | 'non_ri';
-export type AccidentPeriod = 'Yearly' | 'Quarterly' | 'Monthly';
-export type DevelopmentPeriod = 'Yearly' | 'Quarterly' | 'Monthly';
+export type AccidentPeriod = 'yearly' | 'quarterly' | 'monthly';
+export type DevelopmentPeriod = 'yearly' | 'quarterly' | 'monthly';
 export type TriangleType =
-  | 'Incurred Loss'
-  | 'Paid Loss'
-  | 'Reported Claims'
-  | 'Settled Claims';
+  | 'incurred loss'
+  | 'paid loss'
+  | 'reported claims'
+  | 'settled claims';
 
 export interface SelectedState {
   business_type: string;
